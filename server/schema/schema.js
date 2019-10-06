@@ -12,21 +12,6 @@ const {GraphQLObjectType,
   GraphQLNonNull
 } =graphql;
 
-//dummy
-// var books = [
-//   {id: '1', name: 'BOOK1' , genre: 'genre1', authorId: '1'},
-//   {id: '2', name: 'BOOK2' , genre: 'genre3', authorId: '2'},
-//   {id: '3', name: 'BOOK3' , genre: 'genre3', authorId: '1'},
-//   {id: '4', name: 'BOOK4' , genre: 'genre4', authorId: '2'},
-//   {id: '5', name: 'BOOK5' , genre: 'genre5', authorId: '1'},
-// ];
-
-// var authors = [
-//   {id: '1', name: 'Authors1' , age: 11},
-//   {id: '2', name: 'Authors2' , age: 13},
-//   {id: '3', name: 'Authors3' , age: 13},
-// ];
-
 const BookType = new GraphQLObjectType({
   name: 'Book',
   fields:()=>({
@@ -63,14 +48,18 @@ const RootQuery = new GraphQLObjectType({
   fields:{
     book: {
       type : BookType,
-      args: {id: {type : GraphQLID}},
+      args: {
+        id: {type : GraphQLID}
+      },
       resolve(parent,args){
         return Book.findById(args.id);
       }
     },
     author: {
       type : AuthorType,
-      args: {id: {type : GraphQLID}},
+      args: {
+        id: {type : GraphQLID}
+      },
       resolve(parent,args){
         return Author.findById(args.id);
       }
@@ -116,7 +105,7 @@ const Mutation = new GraphQLObjectType({
             authorId: { type: new GraphQLNonNull(GraphQLID) }
         },
         resolve(parent, args){
-          console.log('args', args)
+          console.log('arg', args);
             let book = new Book({
                 name: args.name,
                 genre: args.genre,
