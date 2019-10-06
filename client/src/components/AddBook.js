@@ -1,5 +1,5 @@
 import React, {useState}  from 'react'
-import { getAuthorsQuery, addBookMutation,  getBookQuery } from "./../queries/queries";
+import { getAuthorsQuery, addBookMutation,  getBooksQuery } from "./../queries/queries";
 import { useQuery, useMutation } from '@apollo/react-hooks';
 
 
@@ -37,7 +37,7 @@ function AddBook(){
               genre: bookState.genre,
               authorId: bookState.authorId
           },
-          refetchQueries: [{ query: getBookQuery }]
+          refetchQueries: [{ query: getBooksQuery }]
     });
   }
 
